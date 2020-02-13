@@ -26,6 +26,10 @@ class ProductListView(ListView):
     def get_queryset(self):
         return Product.objects.all()
 
+class ProductDetailSlugView(DetailView):
+    queryset = Product.objects.all()
+    template_name = "products/detail.html"
+
 class ProductDetailView(DetailView):
     # queryset = Product.objects.all()
     template_name = "products/detail.html"
