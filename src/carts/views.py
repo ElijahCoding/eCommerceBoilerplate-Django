@@ -4,12 +4,12 @@ from .models import Cart
 def cart_home(request):
     cart_id = request.session.get('cart_id', None)
 
-    if cart_id is None:
+    qs = Cart.objects.filter(id=cart_id)
+    if qs.cocunt() == 1:
+        cart_obj = qs.first()
+    else:
         cart_obj = Cart.objects.create(user=None)
         request.session['cart_id'] = cart_obj.id
-    else:
-        qs = Cart.objects.filter(id=cart_id)
-        cart_obj = Cart.objects.get(id=cart_id)
 
     return render(request, 'carts/home.html', {})
 
