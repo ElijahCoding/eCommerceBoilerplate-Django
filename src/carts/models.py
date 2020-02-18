@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from products.models import Product
+from django.db.models.signals import post_save, pre_save, m2m_changed
 
 User = settings.AUTH_USER_MODEL
 
@@ -40,3 +41,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+def pre_save_cart_receiver(sender, instance, *args, **kwargs):
+    products = instance.products.all()
+    total = 0
+    for x in products:
+        total += x.price
+    instance.total = total
+
+pre_save.connect(pre_save_cart_receiver, sender=Cart)
