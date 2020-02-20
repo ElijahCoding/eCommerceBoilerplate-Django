@@ -6,7 +6,7 @@ User = settings.AUTH_USER_MODEL
 
 class BillingProfileManager(models.Manager):
     def new_or_get(self, request):
-        ass
+        pass
 
 class BillingProfile(models.Model):
     user = models.OneToOneField(User, null=True, blank=True)
