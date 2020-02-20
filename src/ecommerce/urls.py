@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from .views import home_page, about_page, contact_page
-from accounts.views import login_page, register_page
+from accounts.views import login_page, register_page, guest_register_view
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^about/$', about_page, name='about'),
     url(r'^contact/$', contact_page, name='contact'),
     url(r'^login/$', login_page, name='login'),
+    url(r'^register/guest/$', guest_register_view, name='guest_register'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^register/$', register_page, name='register'),
     url(r'^products/', include("products.urls", namespace='products')),
