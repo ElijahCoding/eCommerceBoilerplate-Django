@@ -3,6 +3,7 @@ import math
 from carts.models import Cart
 from django.db.models.signals import pre_save, post_save
 from ecommerce.utils import unique_order_id_generator
+from billing.models import BillingProfile
 
 ORDER_STATUS_CHOICES = (
     ('created', 'Created'),
@@ -12,6 +13,7 @@ ORDER_STATUS_CHOICES = (
 )
 
 class Order(models.Model):
+    billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True)
     order_id = models.CharField(max_length=120, blank=True)
     cart = models.ForeignKey(Cart)
     status = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
