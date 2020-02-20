@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Cart
 from orders.models import Order
 from products.models import Product
-from accounts.forms import LoginForm
+from accounts.forms import LoginForm, GuestForm
 from billing.models import BillingProfile
 
 def cart_home(request):
@@ -40,6 +40,7 @@ def checkout_home(request):
     billing_profile = None
 
     login_form = LoginForm()
+    guest_form = GuestForm()
 
     if user.is_authenticated():
         billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
